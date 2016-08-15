@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>模板替换</title>
+<script type="text/javascript" src="../../JS/7月1号（自己写的测试库）/yclib.js"></script>
+</head>
+
+<body>
+   <div id="mydiv"></div>
+   <script type="text/javascript">
+       var template='<table border="{border}">'+'<tr><th>Last</th><td>{last}</td></tr>'+'<tr><th>First</th><td>{first}</td></tr>'+'</table>';
+	   
+	   var data={"first":"Carl","last":"Hollywood","border":2};
+		
+	  yc.$("mydiv").innerHTML=yc.supplant(template,data);
+   </script>
+</body>
+</html>

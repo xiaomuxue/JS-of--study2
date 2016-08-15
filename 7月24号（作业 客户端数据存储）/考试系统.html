@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>考试系统</title>
+   <script type="text/javascript" src="yclib.js"></script>
+   <script type="text/javascript" src="sqlhelper.js"></script>
+   <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+   <div id="questions">
+   
+   </div>
+   <script type="text/javascript">
+       //                  表名     字段名  where条件   占位符值数组    回调函数
+	   sqlhelper.select("question","*",     "",       [],          get);
+	   
+	   function get(rows){    //从数据库中获取数据，并将获取的数据拼接成一段字符串
+	       if( !rows || rows==false ){
+		       alert("查询题目失败");
+			   return;
+		   }
+		   //[1,xxxx,a,b,c,d,1],[2,yyyy,a,b,c,d,2]    形成二维数组
+		   var queStr="[";
+		   for(var i=0;i<rows.length;i++){
+		       //console.log(rows.item(i));
+			   queStr+="[";
+			   for(var tname in rows.item(i)){     //rows.item(i)   =>  取一行，一行代表一个题目。
+			       if(rows.items(i).hasOwnProperty(tname)){
+				         queStr+=","+rows.item(i)[tname]+"',";
+					}
+			   }
+			   queStr=queStr.substr(0,queStr.length-1);
+			   queStr+="],";
+		   }
+		   queStr=queStr.substr(0,queStr.length-1);
+		   queStr+="]";
+		   console.log(queStr);
+		   que=eval(queStr);       //把拼接的字符串转换为JS代码
+		   allque=new ShowQuestions(que);
+		   allque.showque();     //调用方法，把题目显示到界面上
+	        
+	   }
+   </script>
+</body>
+</html>

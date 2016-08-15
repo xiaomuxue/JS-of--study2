@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>W3C的DOM存储</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+     //sessionStorage只能在当前页面获取
+	/* alert( "最开始页面加载时取："+sessionStorage.hello);
+	 sessionStorage["hello"]="zy";
+	// sessionStorage["hello"]="world2";
+	 
+	 alert( sessionStorage.hello );
+	 
+	 alert(sessionStorage.getItem("hello") );
+	 
+	 alert( sessionStorage.key("hello"));*/
+	 
+	//localStorage可以跨选项卡
+	alert("最开始的页面加载时取："+localStorage.hello);
+	localStorage["hello"]="zy";
+	
+	alert( localStorage.hello );
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>history的三个重要方法</title>
+</head>
+<body>
+   <a href="b.html">b.html</a>
+   <a href="c.html">c.html</a>
+
+   <input type="text" name="num" id="num"/>
+   <div id="dome1" onclick="javascript:history.forword()">前进</div>
+   <div id="dome2" onclick="javascript:history.back()">后退</div>
+   <div id="dome3" onclick="javascript:history.go()">go</div>
+
+   <script type="text/javascript">
+   	   function gowhere(){
+   	   	   var num=document.getElementById("num").value;
+   	   	   history.go(num);
+   	   }
+   </script>
+</body>
+</html>

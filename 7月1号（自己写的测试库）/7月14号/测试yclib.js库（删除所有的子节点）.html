@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试yclib.js库（删除所有的子节点）</title>
+<script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body>
+   <div id="con">
+       <p id="a">a
+           <span>abc</span>
+           <span>efg</span>
+       </p>
+       <p id="b">b</p>
+       <p id="c">cccc</p>
+   </div>
+   
+   <script type="text/javascript">
+       var newnode=document.createElement("p");
+	   var txtnode=document.createTextNode("hello");
+	   newnode.appendChild( txtnode );
+	   
+	 /*  yc.insertAfter( newnode,yc.$("b") );
+	   yc.removeChildren( "con" );      //测试删除所有节点
+	  
+	  */
+	   
+	   
+	   yc.prependChild( "con",newnode )        //测试在父节点的子节点前面添加一个新节点
+	   yc.removeChildren("a");
+   </script>
+</body>
+</html>

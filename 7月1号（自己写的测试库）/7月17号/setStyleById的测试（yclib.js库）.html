@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>setStyleById的测试（yclib.js库）</title>
+<script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body onload="init()">
+   
+  <!-- <div id="a">hello</div>
+   <div id="b">bye</div>
+
+   <script type="text/javascript">
+       function init(){
+	       var newstyle={ "color":"red","backgroundColor":"blue"};
+		   yc.setStyleById("a",newstyle);     //a表示ID名
+		   
+		   var newstyle2={"color":"blue","background-color":"red"};
+		   yc.setStyleById("b",newstyle2);
+	   }
+   </script>-->
+   
+   
+   <div id="a"> hello
+      <div id="b">bye</div>
+   </div>
+   
+   <p id="c">hello
+        <span id="d">bye</span>
+   </p>
+   
+   <span id="e">bye32222</span>
+   
+   
+     <script type="text/javascript">
+       function init(){
+	     //  var newstyle={ "color":"red","backgroundColor":"blue"};
+//		   yc.setStylesByTagName("div",newstyle);     //指document里面所有的div都继承这个样式
+		   
+		   var newstyle2={"color":"blue","background-color":"red"};
+		   yc.setStylesByTagName("span",newstyle2,"c");
+	   }
+   </script>
+</body>
+</html>

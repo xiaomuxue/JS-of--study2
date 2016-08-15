@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>submit</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var score=location.hash;
+		score=score.replace('#', ':');
+		var result=score.split("_");
+		document.write("你的成绩是（总分为"+result[0]+"分）"+result[1]+"分");
+	</script>
+</body>
+</html>

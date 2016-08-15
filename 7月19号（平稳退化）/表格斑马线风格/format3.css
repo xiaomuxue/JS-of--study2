@@ -1,0 +1,56 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+   font-family:Arial, Helvetica, sans-serif;
+   background-color:#fff;
+   color:#000;
+}
+table{
+   margin:auto;
+   border:1px solid #699;
+}
+caption{
+    margin:auto;
+	padding:.2em;
+	font-size:1.2em;
+	font-weight:bold;
+}
+th{
+   font-weight:normal;
+   font-style:italic;
+   text-align:left;
+   border:1px dotted #699;
+   background-color:#9cc;
+   color:#000;
+}
+/*td{
+   font-weight:normal;
+   font-style:italic;
+   text-align:left;
+   border:1px dotted #699;
+   color:#000;
+}
+*/
+th,td{
+   width:10em;
+   padding:.5em;
+}
+
+/* 新增一个样式规则，通过这个规则来规范html的显示效果，而不要在js中更改显示 */
+.intro{
+   font-weight:bold;
+   font-size:1.4em;
+}
+.odd{
+   background-color:#ffc;
+}
+
+.mouseover{
+    font-weight:bold;
+	color:#f00;
+}
+.mouseout{
+     font-weight:normal;
+	 color:#000;
+}

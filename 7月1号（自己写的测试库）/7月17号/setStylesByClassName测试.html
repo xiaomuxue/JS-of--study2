@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>setStylesByClassName测试</title>
+<script type="text/javascript" src="yclib.js"></script>
+<script type="text/javascript">
+    function init(){
+         var newstyle={"color":"red","backgroundColor":"blue"};
+		 yc.setStylesByClassName( "c","span","c1",newstyle);
+		 //yc.setStylesByClassName( document,"span","c1",newstyle);
+		 //yc.setStylesByClassName( document,"*","c1",newstyle);
+	}
+</script>
+</head>
+
+<body onLoad="init()">
+    <div id="a"> hello
+      <div id="b">bye</div>
+   </div>
+   
+   <p id="c">hello
+        <span id="d" class="c1">bye</span>
+   </p>
+   
+   <span id="e" class="c1">bye32222</span>
+   
+   <p class="c1">pppppp</p>
+</body>
+</html>

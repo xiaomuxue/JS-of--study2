@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>new window</title>
+	<style>
+       *{margin:0 auto;padding:0;}
+       .zC{width:250px;height:200px;border:1px solid #333;margin-top:40px;}
+       .xM{margin-top:40px;height:25px;}
+       .dZ{margin-top:40px;height:25px;}
+       .AN{margin-top:20px;margin-left:30px;}
+	</style>
+</head>
+<body>
+	<div class="zC">
+      省份：<input type="text" class="xM" id="SF"/><br/>
+      &nbsp;&nbsp;市：<input type="text" class="dZ" id="S"/><br/>
+      <input type="button" value="确定" class="AN" id="btn1" />
+      <input type="button" value="取消" class="AN" id="btn2" />
+    </div>
+    
+    <script type="text/javascript">
+       var SF=document.getElementById("SF");
+	   var S=document.getElementById("S");
+       document.getElementById("btn1").onclick=function(){
+       	window.returnValue=SF.value+S.value;
+       	close();
+       }
+        document.getElementById("btn2").onclick=function(){
+       	window.returnValue="";
+       	close();
+       }
+
+	   // function SF(SF){
+	   //    if(input.content.value==""){
+		  //     QX();
+		  // }else{
+		  //    function S(S){
+		  //       if(input.content.value==""){
+		  //        QX();
+			 // }else{
+		  //        Ret();
+			 // }
+		  //   }
+		  // }
+	   // }
+	   
+	   
+	   
+	   // function Ret(){
+	   //    window.returnValue="SF.value+S.value";
+		  // window.open();
+	   // }
+	   
+	   // function QX(){
+	   //    QX.innerHTML="";
+	   // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5-screen的属性</title>
+</head>
+<body>
+	<input id="demo1" type="button" value="显示屏幕信息"/>
+	<script type="text/javascript">
+	 document.getElementById("demo1").onclick=function(){
+		alert(
+            "屏幕信息：\n"+
+            "分辨率:"+screen.width+"x"+screen.height+"\n"+
+            "可用区域:"+screen.availWidth+"x"+screen.availHeight
+			);
+	}
+	</script>
+</body>
+</html>

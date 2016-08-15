@@ -1,0 +1,13 @@
+@charset "utf-8";
+#slideshow{
+	width: 100px;
+	height: 100px;
+	position: relative;
+	/*
+	overflow的四个值：visible:不裁剪，全部内容可见;
+					  hidden
+					  scroll
+					  auto
+	 */
+	overflow: hidden;
+}

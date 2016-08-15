@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>sqlite存储</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+    var db;
+	 //创建数据库    test
+    if( window.openDatabase){    //第一个为数据库名    第二个为版本号      
+	     db=openDatabase("test",1.0,"testdb",10000);    //创建数据库
+		 
+		 //创建表
+		 db.transaction(function( transaction){
+		     //transaction：事务                        auto_increment:表示自增
+			 transaction.executeSql("creata table student(sid int,sname text,age int,sex text,address text)",[]);
+			 
+		});
+		
+		//插入数据
+		db.transaction(function( transaction){
+		     transaction.executeSql("insert into student(sid,sname,age,sex,address) values(0,'zs',20,'男','湖南')",[]);
+		});
+		
+		/*//更新数据
+		db.transaction(function( transaction){
+		     transaction.executeSql("update student set sname='张三' where sname='zs'",[]);
+		});*/
+		
+	/*	//删除数据库里面的所有数据
+		db.transaction(function( transaction){
+		     transaction.executeSql("delete from student",[]);
+		});*/
+	}
+</script>
+
+</body>
+</html>

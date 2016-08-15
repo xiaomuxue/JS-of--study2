@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>考试系统（出分成绩【结果页面】）</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var score=location.hash;     //hash值是用来传值的    #40—10
+		score=score.replace("#","");   //把#替换掉
+		var result=score.split("_");
+		document.write("你的成绩是（总分为"+result[0]+"分)"+result[1]+"分");
+	</script>
+</body>
+</html>

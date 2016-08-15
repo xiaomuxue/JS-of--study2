@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>xml_添加和查询学生</title>
+    <script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body>
+
+   <form name="myform">
+       <input type="hidden" name="op" value="add" />
+       <p>学生名：<input type="text" name="sname" value="张三" /></p>
+       <p>学生年龄：<input type="text" name="age" value="22" /></p>
+       <p><input type="button" onclick="add()" value="添加" /></p> 
+   </form>
+
+   <p id="result"></p>
+   
+   <span id="showall">显示所有学生信息</span>
+   <hr/>
+   
+   <table border="1" width="700px">
+       <thead>
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+            </tr>
+       </thead>
+       <tbody id="students">
+           
+       </tbody>
+   </table>
+   
+   <span id="showallByJson">显示所有学生的信息_JSON</span>
+   
+   <script type="text/javascript">
+   
+       var request;
+       function add(){
+	       var params=yc.serialize( document.myform );     //序列化表单数据    sname=a&age=22
+		   console.log(params);
+		   request=createXHR();       //创建一个http对象
+		   if( request ){
+				request.onreadystatechange =listener;
+				request.open("POST","http://192.168.15.222:8080/testxml/student.action", true);
+				//当使用post发送表单数据时，要加入一个请求头，这是一个表单数据。
+				request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				//POST方式请求服务器时，参数拼接后放在 send中，多个参之间用 & 联接
+				request.send( params );
+			}
+	   }
+	   
+	   //如果还想支持ie的早期版本，则按下面函数：
+        function createXHR(){
+		    //ie7+, ff, chrome, safari等
+			if(typeof XMLHttpRequest != "undefined"){
+			     return new XMLHttpRequest();
+			}else if(typeof ActiveXObject != "undefined"){       //IE早期版本（这一段是为了兼容IE8以下的低版本浏览器）
+			    //查看调用函数中是否存在一个activeXString的变量。
+				if(typeof arguments.calle.activeXString != "string"){    //表示多存了版本字符串
+				   var versions=["MSXML2.XMLHttp.6.0","MSXML2.XMLHttp.3.0","MSXML2.XMLHttp"];
+				   for(var i=0,len=versions.length;i<len;i++){
+				       try{
+					       var xhr=new ActiveXObject(versions[i]);
+						   arguments.callee.activeXString=versions[i];
+						   return xhr;
+					   }catch(ex){
+					       //skip  不处理
+					   }
+				   }
+				}
+				return new ActiveXObject(arguments.callee.activeXString);
+			}else{
+			    throw new Error("No XHR object avaliable.");
+			}
+		}
+	   
+	   //回调函数用于接收服务器端的响应
+	   function listener(){
+		    if( request.readyState==4&& request.status==200 ){
+			    document.getElementById("result").innerHTML=request.responseText; 
+			}
+		}
+		
+	  yc.addEvent( "showall","click",function(){
+	        request=createXHR();
+			if( request ){
+				request.onreadystatechange =listener;
+				request.open("POST","http://192.168.15.222:8080/testxml/student.action", true);
+				//当使用post发送表单数据时，要加入一个请求头，这是一个表单数据。
+				request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				//POST方式请求服务器时，参数拼接后放在 send中，多个参之间用 & 联接
+				request.send( "op=findAll" );
+			}
+	  });
+	  
+	  function findAlllistener(){
+	      if( request.readyState==4 && request.status==200 ){
+			  var str="";
+		      var xml= request.responseXML;
+			 // var students=xml.getElementsByTagName("student");
+			 var nodelist=yc.selectXMLNodes( xmldom,"/students/student");
+			  for( var i=0;i<nodelist.length;i++){
+			      str+="<tr>";
+				  //id
+				  var node=nodelist[i];
+				  var id=node.getAttribute('id');
+				  var sname=node.getElementsByTagName("sname")[0].childNode[0].nodeValue;
+				  var age=node.getElementsByTagName("age")[0].childNode[0].nodeValue;
+				  
+				  str+="<td>"+id+"</td>";
+				  str+="<td>"+sname+"</td>";
+				  str+="<td>"+age+"</td>";
+				  
+				  str+="</tr>";
+				  //sname
+				  //age
+			  }
+			  yc.$("students").innerHTML=str;
+		  }
+	  }
+	  
+	  
+	  yc.addEvent( "showallByJson","click",function(){
+	        request=createXHR();
+			if( request ){
+			     request.onreadystatechange=findAlllistener2;
+				 request.open("POST","http://192.168.15.222:8080/testxml/student.action", true);
+				//当使用post发送表单数据时，要加入一个请求头，这是一个表单数据。
+				request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				//POST方式请求服务器时，参数拼接后放在 send中，多个参之间用 & 联接
+				request.send( "op=findAll2" );
+			}
+	  
+	  });
+	  
+	  
+	 function findAlllistener2(){
+	      if( request.readyState==4 && request.status==200 ){
+			  var str="";
+		      var jsonString= request.responseText;     //取出返回的结果（json字符串）
+			 // var students=xml.getElementsByTagName("student");
+			 //
+			 var jsonarray=eval( '('+jsonString+')');
+			  for( var i=0;i<jsonarray.length;i++){
+			      str+="<tr>";
+				  //id
+				  var student=jsonarray[i];
+				  var id=student.id;
+				  var sname=student.sname;
+				  var age=student.age;
+				  
+				  str+="<td>"+id+"</td>";
+				  str+="<td>"+sname+"</td>";
+				  str+="<td>"+age+"</td>";
+				  
+				  str+="</tr>";
+				  //sname
+				  //age
+			  }
+			  yc.$("students").innerHTML=str;
+		  }
+	  } 
+	  
+   </script>
+   
+</body>
+</html>

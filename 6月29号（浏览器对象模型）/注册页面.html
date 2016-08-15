@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>注册页面</title>
+	<style>
+       *{margin:0 auto;padding:0;}
+       .zC{width:250px;height:200px;border:1px solid #333;margin-top:40px;}
+       .xM{margin-top:40px;height:25px;}
+       .dZ{margin-top:40px;height:25px;}
+	</style>
+
+</head>
+<body>
+   <div class="zC">
+      姓名：<input type="text" class="xM"/><br/>
+      地址：<input type="text" class="dZ" id="address"/>
+      <input type="button" value="选择" onclick="openwin()"/>
+    </div>
+
+	<script type="text/javascript">
+		function openwin(){
+            // window.open("new window.html","new window","width=260,height=300");
+            
+            
+            //另一种方法：模式窗口  （在子窗口没填完时）
+
+            // 显示模式窗口，模式窗口的作用：  1.  唯一性     2.回传值
+            // 新开的模式窗口.returnValue
+            var ret=window.showModalDialog("new window.html",window,"dialogWidth=300,dialogHeight=300,location=0,status=0,resizable=0");
+            if(ret){
+            	document.getElementById("address").value=ret;
+            }
+		}
+	</script>
+   
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>window.name属性_页面访问次数计算</title>
+
+<script type="text/javascript">
+     if( window.name ){
+	     var val= parseInt( window.name );
+		 val+=1;
+		 window.name=val;
+	 }else{
+	     window.name=1;
+	 }
+	 document.write("页面被访问了："+window.name);
+	 
+</script>
+</head>
+
+<body>
+</body>
+</html>

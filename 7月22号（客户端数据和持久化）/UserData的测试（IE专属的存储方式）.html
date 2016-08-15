@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>UserData的测试（IE专属的存储方式）</title>
+<script type="text/javascript" src="UserData.js"></script>
+<script type="text/javascript">
+     window.onload=function(){
+	      UserData.set("name","zy");
+		  alert( UserData.get("name"));
+		  
+		  UserData.del("name");
+		  alert( UserData.get("name"));
+	}
+</script>
+</head>
+
+<body>
+</body>
+</html>

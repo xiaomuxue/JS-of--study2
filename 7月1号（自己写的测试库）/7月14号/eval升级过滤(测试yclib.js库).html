@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eval升级过滤(测试yclib.js库)</title>
+<script type="text/javascript" src="../../JS/7月1号（自己写的测试库）/yclib.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+      var obj=yc.parseJson('{"name":"smith","age":20}',function(k,v){
+	       if( k=='age' ){
+		      v=v<0?1:v;
+		   }
+		   return v;
+	  });
+	  alert( obj.name+"/t"+obj.age );
+	  var obj2=yc.parseJson('{"name":"smith","age":-20}',function(k,v){
+	         return (k=='age'&&v<0)?1:v;
+	  });
+	  alert( obj2.name+":"+obj2.age );
+	  
+	  //更复杂的情况出现：  {"name":"tom","age":20,"address":{"proince":"湖南","postcode":"123456"}}
+	  
+	  
+	  
+	  var obj3={"name":"zy","age":20};
+	  alert( obj3.toJSONString() );
+	  
+	  var arr=new Array();
+	  arr[0]={"name":"ty","age":21};
+	  arr[1]={"name":"tc","age":21};
+	  arr[2]={"name":"tz","age":21};
+	  alert( arr.toJSONString() );
+	  
+  </script>
+</body>
+</html>

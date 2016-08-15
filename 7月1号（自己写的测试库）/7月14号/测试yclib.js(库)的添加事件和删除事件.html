@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试yclib.js(库)</title>
+<script type="text/javascript" src="yclib.js"></script>
+
+</head>
+
+<body>
+
+   <p id="show">hello world</p>
+
+   <script type="text/javascript">
+       var show=function(){
+	       alert("hello");
+	   }  
+       yc.addEvent( "show","click",show );
+	   yc.removeEvent( "show","click",show );
+	   
+	   //getElementById()      id
+	   //getElementsByTagName()     标签名
+	   //getElementsByClassName()
+	   //getElement
+	   
+   </script>
+</body>
+</html>

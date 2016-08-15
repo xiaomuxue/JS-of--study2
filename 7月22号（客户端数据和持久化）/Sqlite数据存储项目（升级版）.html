@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+   <head>
+     <meta charset="utf-8">
+     <title>Sqlite数据库存储项目（升级版）</title>
+     <script type="text/javascript" src="yclib.js"></script>
+     <script type="text/javascript">
+         function del(obj){
+			//obj  ->   input  ->  td   ->   tr  
+		   var tr=obj.parentNode.parentNode;
+		   //  tbody
+		   var tbody=tr.parentNode;
+		   tbody.removeChild(tr);
+		   if( window.openDatabase){
+			   db.transaction(function(transaction){
+					 transaction.executeSql("delete from student where sid="+tr.firstChild.innerHTML,[]);
+			   });
+		   }
+		}
+</script>
+  </head>
+
+  <body>
+     <h1>添加学生</h1>
+     <hr/>
+     <p>学号：<input type="text" name="sid" id="sid" /></p>
+     <p>学生名：<input type="text" name="sname" id="sname" /></p>
+     <p>年龄：<input type="text" name="age" id="age" /></p>
+     <input type="button" id="btn" value="添加" />
+
+     <hr/>
+
+    <table border="1" width="500px">
+         <thead>
+              <tr>
+                   <td>学生号</td>
+                   <td>学生名</td>
+                   <td>年龄</td>
+                   <td><input type="button" class="bt" value="操作（删除）" onclick="del(this)" /></td>
+              </tr>
+         </thead>
+         <tbody id="content">
+         
+         </tbody>
+    </table>
+
+    <script type="text/javascript">
+	  
+	    var db;
+		if(window.openDatabase ){     //创建数据库
+		     db=openDatabase("stuInfo",1.0,"testdb",10000);
+			 db.transaction(function(transaction){       //创建数据表
+			     //删除表
+				 //transaction.executeSql( "drop table student" );
+			       transaction.executeSql("create table if not exists student(sid int primary key,sname text,age int)",[]);
+			 });
+		}
+		
+		
+		window.onload=function(){
+		     yc.addEvent("btn","click",function(){
+				 //判断数据库以及表是否存在
+				 if(!db){return;}
+				 
+				 //从界面取出要存的值      取值    sid   sname   age
+			       var sid=yc.$("sid").value;        
+				   var sname=yc.$("sname").value;
+				   var age=yc.$("age").value;
+				   
+				   //存到数据库
+				   //插入数据
+				   db.transaction(function(transaction){
+				        transaction.executeSql("insert into student(sid,sname,age)values(?,?,?)",[sid,sname,age]);
+						//清空tbody中原有的所有的数据
+						var tbody=yc.$("content");
+						tbody.innerHTML="";
+						
+						//重新从数据库查询最新的结果
+					   db.transaction(function(transaction){
+						     transaction.executeSql("select * from student",[],function(transaction,results){
+							       for(var i=0;i<results.rows.length;i++){
+									 var rows=results.rows.item(i);     //item(i) 取出第i行的值
+										  
+								     var tdslen=document.getElementsByTagName("td");
+									 var newRow=tbody.insertRow(tbody.rows.length);
+									 var cell=newRow.insertCell(0);
+									 cell.innerHTML=rows['sid'];
+									 var cell1=newRow.insertCell(1);
+										   //在第一个节点创建一个文本节点
+									 cell1.appendChild(document.createTextNode( rows['sname']));
+										   
+									 var cell2=newRow.insertCell(2);
+									 cell2.appendChild(document.createTextNode( rows['age']));
+										   //把第四行的文本复制一遍
+									 var cell3=newRow.insertCell(3);
+									 cell3.innerHTML=tdslen[3].innerHTML;
+										  //把这些内容都添加到tbody里面去
+									 tbody.appendChild( newRow );
+								     
+								   }
+							 });
+						   });
+						});
+				   });
+			 }
+		</script>
+  </body>
+</html>

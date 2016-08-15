@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>考试系统</title>
+	
+</head>
+<body>
+	<div id="questions">
+		
+	</div>
+
+	<script>
+		// var questions=[{1,"湖南的省会城市是？"，"衡阳"，"长沙","湘潭","株洲","岳阳"}];
+
+		function ShowQuestions(questions){
+                this.que=questions;  
+		}
+        var timer;   //把定时器定义为一个全局变量
+        ShowQuestions.prototype={          //写ShowQuestions的原型
+        	showque:function(){
+        		var ques=document.getElementById("questions");
+        		//插入剩余时间的div
+        		var timebox=document.createElement("div");
+        		timebox.innerHTML="剩余时间（单位 s）：";
+        		var time=document.createElement("span");
+        		timebox.appendChild(time);  //<div>剩余时间（单位 s）:<span></sapn></div>
+        		var settime=new Date().getTime()+20000;    
+        		  timer=setInterval(function(){      //给剩余的时间设定一个定时器，保证实时更新
+                     var innertime=parseInt((settime-new Date().getTime())/1000);
+                     if(innertime==0){
+                     	clearInterval(timer);
+                     	submit( timer );
+                     }
+                     time.innerHTML=innertime;    //更新时间
+        		},50);
+        		document.body.insertBefore(timebox,ques);
+
+        		//插入所有的题目
+        		for(var i=0;i<this.getTotal();i++){
+        			var num=document.createElement("span");
+        			num.id="q"+i;
+        			num.innerHTML=this.que[i][0]+"、";    //<span id="q1">1、</span>
+        			ques.appendChild(num);
+        			var question=document.createElement("span");
+        			questions.innerHTML=this.que[i][1];
+        			ques.appendChild(question);     //<span>xxxxx</span>
+        			var options=document.createElement("p");      //当前题目的选项
+        			for(var j=0;j<4;j++){
+        				var inp=document.createElement("input");
+        				inp.type="radio";
+        				inp.name="ans"+i;
+        				inp.value=j+1;   //<p><input  type="radio" name="ans1" value="1" /><span>xxx</span>   <p><input  type="radio" name="ans1" value="2" /><span>xxx</span>     <p><input  type="radio" name="ans1" value="3" /><span>xxx</span>   <p><input  type="radio" name="ans1" value="4" /><span>xxx</span>
+        				var ans=document.createElement("span");
+        				ans.innerHTML="&#"+(65+j)+";、"+this.que[i][2+j];
+
+        				options.appendChild(inp);
+        				options.appendChild(ans);
+
+        			}
+        			ques.appendChild(options);
+        			ques.appendChild(document.createElement("hr"));
+        		}
+
+        		var btn=document.createElement("input");
+        		btn.type="button";
+        		btn.value="提交试卷";
+        		btn.onclick=submit;
+        		ques.appendChild(btn);
+
+        	},
+        	getTotal:function(){
+        		return this.que.length;
+        	}
+        }
+
+		function submit(){
+			clearInterval(timer);    //关闭计时器
+
+			//取消页面中所有的input元素的操作
+			var allinput=document.getElementsByTagName("INPUT");
+			for(var i=0;i<allinput.length;i++){
+				allinput[i].disabled=true;
+			}
+
+           //存答案到ans中，以便计分
+			var ans=[];
+			for(var i=0;i<allque.que.length;i++){
+				var num="ans"+i;   //ans1
+				var answer=document.getElementsByName(num);      //查到每一题的四个单选框
+				var flag=true;
+				//循环四个单选框    radio
+				for(var j=0;j<answer.length;j++){
+					if(answer[j].checked){
+						ans.push(answer[j].value);
+						flag=false;    //用户选了答案
+					}
+				}
+
+				//当前这一题用户没有选择答案，  则将ans数组中对应的位置设置0
+				if(flag){
+					ans.push("0");
+				}
+			}
+
+           //否则计分从0开始
+			var score=0;
+			for(var i=0;i<allque.que.length;i++){
+				if(ans[i]==allque.que[i][4]){
+					score+=10;
+				}
+			}
+
+			var newpage="考试系统（出分成绩【结果页面】）.html#"+(allque.que.length*10)+"_"+score;
+			window.open(newpage,"new window","width=300,height=300");
+			close();
+		}
+
+		var que=[
+           [1,"中国的首都？","北京","长沙","上海","重庆","1"],
+           [2,"湖南的省会？","岳阳","长沙","衡阳","株洲","2"],
+           [3,"下列哪个是沿海城市？","北京","浙江","厦门","成都","2"],
+           [4,"下列哪个是沿海城市？","北京","浙江","厦门","成都","2"]
+		];
+
+		var allque=new ShowQuestions(que);
+		allque.showque();
+			//倒计时
+			
+		    //时间完了，要以mode窗口的形式显示当前用户的得分，再关闭当前窗口。
+		    
+		
+	</script>
+</body>
+</html>

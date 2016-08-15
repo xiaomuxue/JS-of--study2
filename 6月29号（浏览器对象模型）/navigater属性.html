@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4-navigater属性</title>
+</head>
+<body>
+   <input id="demo1" type="button" value="显示浏览器的信息"/>
+   <script type="text/javascript">
+   	   //navigator.appName="zy";
+   	   
+   	   document.getElementById("demo1").onclick=function(){
+   	   	  alert(
+              "浏览器信息：n"+
+              "名称:"+navigator.appName+"\n"+
+              "平台和版本:"+navigator.appVersion+"\n"+
+              "操作系统:"+navigator.platform+"\n"+
+              "userAgent:"+navigator.userAgent
+   	   	  	);
+   	   }
+   </script>
+</body>
+</html>

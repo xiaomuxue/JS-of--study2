@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>页面的html与css与js完全分离</title>
+<link rel="stylesheet" href="layout.css" media="screen"/>
+<script type="text/javascript" src="yclib.js"></script>
+<script type="text/javascript" src="showPic2.js"></script>
+</head>
+
+<body>
+  <h1>图片浏览</h1>
+    <ul id="imagegallery">
+      <li>       <!-- 平稳退化：当阻止了JS 的功能时，页面要还能正常的运行  -->
+                 <!-- 在此处阻止了js之后，就运行href的代码，直接链到图片   -->
+         <a href="images/1.jpg" title="桃花">桃花</a>
+      </li>
+      <li>
+         <a href="images/2.jpg" title="玫瑰">玫瑰</a>
+      </li>
+   </ul>
+   
+   <!-- 在这里的img 和 p两个标记只是为showPic函数服务的，只是为了让dom方法处理它们，那么用dom方法来创建它们才最合适 -->
+  <!--   <img id="placeholder" src="images/placeholder.png" alt="我的图片库"/>
+     <p id="description">请选择一张图片</p>-->
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>实现平稳退化</title>
+<link rel="stylesheet" href="layout.css" media="screen"/>
+<script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body>
+
+ <h1>图片浏览</h1>
+    <ul>
+      <li>       <!-- 平稳退化：当阻止了JS 的功能时，页面要还能正常的运行  -->
+                 <!-- 在此处阻止了js之后，就运行href的代码，直接链到图片   -->
+         <a href="images/1.jpg" onclick="showPic1(this);return false;" title="桃花">桃花</a>
+      </li>
+      <li>
+         <a href="images/2.jpg" onclick="showPic1(this);return false;" title="玫瑰">玫瑰</a>
+      </li>
+   </ul>
+   <img id="placeholder" src="images/placeholder.png" alt="我的图片库"/>
+   <p id="description">请选择一张图片</p>
+   <script type="text/javascript" src="showPic.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试库一</title>
+<script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body>
+    <!-- 库代码一定要先运行，修改代码后运行 -->
+    
+    <div id="a">a</div>
+    <div id="b">b</div>
+    <div id="c">c</div>
+    
+    <script type="text/javascript">
+        alert( yc.$("a").innerHTML);     //返回id为a的值为a
+		alert( yc.$("a","b")[1].innerHTML);   //b
+		
+		//alert( yc.$( {"a","b"} ) );
+    </script>
+</body>
+</html>

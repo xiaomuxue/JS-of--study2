@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试节点数和查找结点（yclib.js库）</title>
+<script type="text/javascript" src="yclib.js"></script>
+</head>
+
+<body>
+
+   <p id="show">hello world</p>
+   
+   <div id="div1">
+       <p class=" a">xx</p>
+       <p class="a b">yy</p>
+       <p class=" c a">yyy</p>
+       <p class="c a b">yyyyy</p>
+   </div>
+   
+   <span class="a">zzz</span>
+   <a href="" class="a">ttt</a>
+   
+   <script type="text/javascript">
+      var r=yc.getElementsByClassName( "a","*" );
+	  alert( r.length );
+   </script>
+
+</body>
+</html>
